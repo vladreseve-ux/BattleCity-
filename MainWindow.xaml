@@ -1,0 +1,91 @@
+<Window x:Class="BattleCity.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BattleCity"
+        Title="BATTLE CITY" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen" Background="#141719" Foreground="#E8E1C8"
+        FontFamily="Consolas" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        Deactivated="Window_Deactivated" Closing="Window_Closing" Focusable="True">
+  <Window.Resources>
+    <Style TargetType="Button">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Foreground" Value="#E8E1C8"/>
+      <Setter Property="Background" Value="#262B2F"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Margin" Value="0,0,0,8"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="#566066"
+                    BorderThickness="2" Padding="10,9">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="#363E44"/>
+                <Setter TargetName="bd" Property="BorderBrush" Value="#E5B94F"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="bd" Property="Background" Value="#E5B94F"/>
+                <Setter Property="Foreground" Value="#141719"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="Label" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="#7E8C93"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="Margin" Value="0,14,0,0"/>
+    </Style>
+    <Style x:Key="Value" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="#F2D27A"/>
+      <Setter Property="FontSize" Value="26"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+  </Window.Resources>
+
+  <Grid Margin="22">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="22"/>
+      <ColumnDefinition Width="210"/>
+    </Grid.ColumnDefinitions>
+
+    <Border Grid.Column="0" Background="#6E6E6E" BorderBrush="#9A9A9A" BorderThickness="3" Padding="10"
+            VerticalAlignment="Top">
+      <local:BoardView x:Name="Board" Width="600" Height="600" ClipToBounds="True"/>
+    </Border>
+
+    <DockPanel Grid.Column="2" LastChildFill="False">
+      <StackPanel DockPanel.Dock="Top">
+        <TextBlock Text="BATTLE" FontSize="34" FontWeight="Bold" Foreground="#E5B94F"/>
+        <TextBlock Text="CITY" FontSize="34" FontWeight="Bold" Foreground="#E5B94F" Margin="0,-8,0,0"/>
+        <Rectangle Height="3" Fill="#E5B94F" Margin="0,6,0,0"/>
+
+        <TextBlock Text="СЧЁТ" Style="{StaticResource Label}"/>
+        <TextBlock x:Name="ScoreText" Style="{StaticResource Value}" Text="000000"/>
+        <TextBlock Text="УРОВЕНЬ" Style="{StaticResource Label}"/>
+        <TextBlock x:Name="LevelText" Style="{StaticResource Value}" Text="01"/>
+        <TextBlock Text="ЖИЗНИ" Style="{StaticResource Label}"/>
+        <TextBlock x:Name="LivesText" Style="{StaticResource Value}" Text="x 3"/>
+        <TextBlock Text="БРОНЯ" Style="{StaticResource Label}"/>
+        <TextBlock x:Name="HpText" Style="{StaticResource Value}" Text="■ ■"/>
+        <TextBlock Text="ВРАГОВ ОСТАЛОСЬ" Style="{StaticResource Label}"/>
+        <TextBlock x:Name="EnemyText" Style="{StaticResource Value}" Text="6"/>
+      </StackPanel>
+
+      <StackPanel DockPanel.Dock="Bottom">
+        <TextBlock x:Name="ToastText" Foreground="#8FD18B" FontSize="13" Height="22" Margin="0,0,0,6"/>
+        <Button Content="НОВАЯ ИГРА  [N]" Click="NewGame_Click"/>
+        <Button Content="СОХРАНИТЬ" Click="Save_Click"/>
+        <Button Content="ЗАГРУЗИТЬ" Click="Load_Click"/>
+        <TextBlock Foreground="#7E8C93" FontSize="12" LineHeight="18" Margin="0,10,0,0"
+                   Text="WASD / ←↑↓→  — ехать&#10;ПРОБЕЛ — огонь&#10;P — пауза"/>
+      </StackPanel>
+    </DockPanel>
+  </Grid>
+</Window>

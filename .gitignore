@@ -1,0 +1,12 @@
+## Build and Output
+bin/
+obj/
+
+## Visual Studio / IDE
+.vs/
+*.user
+*.suo
+
+## Runtime saves
+save.json
+save.json.tmp
